@@ -14,7 +14,7 @@
 
             this.random = new Random();
 
-            this.Snake = new Snake(new Position(0, 0), 3, this);
+            this.Snake = new Snake(new Position(Width/2,Height/2), 3, this);
             this.AppleCounter = 0;
 
             this.SpawnApple();
@@ -64,6 +64,7 @@
 
                 if (Snake.Dead)
                 {
+                    IOManager.Draw(this);
                     IOManager.DisplayDeathMessage(this);
                     break;
                 }

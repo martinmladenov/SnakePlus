@@ -8,12 +8,21 @@
     {
         public static void Draw(Game game)
         {
-            Console.SetCursorPosition(0, 0);
+            string collectedApples = $"Apples collected: {game.AppleCounter}";
 
-            StringBuilder sb = new StringBuilder();
+            Console.SetCursorPosition(
+                (Console.WindowWidth - collectedApples.Length) / 2,
+                (Console.WindowHeight - game.Height) / 2 - 2);
+
+            Console.Write(collectedApples);
 
             for (int y = 0; y < game.Height; y++)
             {
+                Console.SetCursorPosition(
+                    Console.WindowWidth / 2 - game.Width,
+                    (Console.WindowHeight - game.Height) / 2 + y);
+
+                StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < game.Width; x++)
                 {
                     Position currPosition = new Position(x, y);
@@ -39,17 +48,34 @@
                     sb.Append(toDraw + " ");
                 }
 
-                sb.AppendLine();
+                Console.Write(sb);
             }
-
-            Console.WriteLine(sb.ToString());
         }
 
         public static void DisplayDeathMessage(Game game)
         {
-            Console.Clear();
-            Console.WriteLine("YOU DIED");
-            Console.WriteLine($"Apples collected: {game.AppleCounter}");
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.SetCursorPosition(
+                Console.WindowWidth / 2 - 4,
+                (Console.WindowHeight - game.Height) / 2 - 3);
+            Console.Write("YOU DIED");
+
+            Position snakePos = game.Snake.Head;
+
+            Console.SetCursorPosition(
+                Console.WindowWidth / 2 - game.Width + 2 * snakePos.X,
+                (Console.WindowHeight - game.Height) / 2 + snakePos.Y);
+
+            Console.Write('X');
+
+            Console.SetCursorPosition(0,0);
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        public static void ResizeWindow()
+        {
+            Console.SetWindowSize(100, 30);
         }
     }
 }

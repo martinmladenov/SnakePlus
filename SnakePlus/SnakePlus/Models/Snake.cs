@@ -109,7 +109,6 @@
             if (Positions.Contains(nextPosition))
             {
                 Dead = true;
-                return;
             }
 
             positionsLinkedList.AddFirst(nextPosition);
