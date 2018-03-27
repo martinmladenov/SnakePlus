@@ -30,8 +30,6 @@
         {
             while (true)
             {
-                IOManager.Draw(this);
-
                 if (Console.KeyAvailable)
                 {
                     ConsoleKey key = Console.ReadKey(true).Key;
@@ -62,9 +60,10 @@
                     Snake.Extend++;
                 }
 
+                IOManager.Draw(this);
+
                 if (Snake.Dead)
                 {
-                    IOManager.Draw(this);
                     IOManager.DisplayDeathMessage(this);
                     break;
                 }
