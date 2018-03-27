@@ -16,6 +16,8 @@
 
             this.Snake = new Snake(new Position(0, 0), 3, this);
             this.AppleCounter = 0;
+
+            this.SpawnApple();
         }
 
         public int Width { get; }
@@ -53,9 +55,16 @@
 
                 Snake.Move();
 
+                if (Snake.Head.Equals(AppleLocation))
+                {
+                    SpawnApple();
+                    AppleCounter++;
+                    Snake.Extend++;
+                }
+
                 if (Snake.Dead)
                 {
-                    IOManager.DisplayDeathMessage();
+                    IOManager.DisplayDeathMessage(this);
                     break;
                 }
 

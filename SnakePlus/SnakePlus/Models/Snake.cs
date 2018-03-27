@@ -5,7 +5,6 @@
 
     public class Snake
     {
-        private int extendTurns;
         private Game game;
         private LinkedList<Position> positionsLinkedList;
         private Direction currentDirection;
@@ -15,7 +14,7 @@
             positionsLinkedList = new LinkedList<Position>();
             positionsLinkedList.AddFirst(startPos);
 
-            extendTurns = length;
+            Extend = length;
             this.game = game;
 
             CurrentDirection = Direction.Up;
@@ -26,6 +25,7 @@
 
         public HashSet<Position> Positions { get; }
         public Position Head => positionsLinkedList.First.Value;
+        public int Extend { get; set; }
 
         public Direction CurrentDirection
         {
@@ -48,9 +48,9 @@
 
         public void Move()
         {
-            if (extendTurns > 0)
+            if (Extend > 0)
             {
-                extendTurns--;
+                Extend--;
             }
             else
             {

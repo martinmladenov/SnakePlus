@@ -27,6 +27,10 @@
                     {
                         toDraw = 'x';
                     }
+                    else if (game.AppleLocation.Equals(currPosition))
+                    {
+                        toDraw = 'ó';
+                    }
                     else
                     {
                         toDraw = '.';
@@ -41,10 +45,11 @@
             Console.WriteLine(sb.ToString());
         }
 
-        public static void DisplayDeathMessage()
+        public static void DisplayDeathMessage(Game game)
         {
             Console.Clear();
             Console.WriteLine("YOU DIED");
+            Console.WriteLine($"Apples collected: {game.AppleCounter}");
         }
     }
 }
