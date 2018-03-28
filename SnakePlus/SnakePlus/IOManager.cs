@@ -57,6 +57,50 @@
             }
         }
 
+        public static void DisplayMenu(IMenu menu)
+        {
+            for (int y = 0; y < menu.Height; y++)
+            {
+                Console.SetCursorPosition(
+                    (Console.WindowWidth - menu.Width) / 2,
+                    (Console.WindowHeight - menu.Height) / 2 + y);
+
+                char sideChar, midChar;
+                if (y == 0)
+                {
+                    sideChar = ' ';
+                    midChar = '-';
+                }
+                else if (y == menu.Height - 1)
+                {
+                    sideChar = ' ';
+                    midChar = '-';
+                }
+                else
+                {
+                    sideChar = '|';
+                    midChar = ' ';
+                }
+                Console.Write(sideChar + new string(midChar, menu.Width - 2) + sideChar);
+            }
+
+            for (int i = 0; i < menu.Text.Length; i++)
+            {
+                string msg = menu.Text[i];
+
+                Console.SetCursorPosition(
+                    (Console.WindowWidth - msg.Length) / 2,
+                    (Console.WindowHeight - menu.Text.Length) / 2 + i);
+
+                Console.Write(msg);
+            }
+
+            do
+            {
+                menu.OnKeyPress(Console.ReadKey(true).Key);
+            } while (!menu.Done);
+        }
+
         public static void DisplayDeathMessage(IGame game)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -74,7 +118,7 @@
 
             Console.Write('X');
 
-            Console.SetCursorPosition(0,0);
+            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 

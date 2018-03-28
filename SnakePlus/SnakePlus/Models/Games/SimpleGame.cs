@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading;
     using Contracts;
+    using Menus;
     using Snakes;
 
     public class SimpleGame : IGame
@@ -55,6 +56,9 @@
                         case ConsoleKey.DownArrow:
                             Snake.CurrentDirection = Direction.Down;
                             break;
+                        case ConsoleKey.Spacebar:
+                            Pause();
+                            break;
                     }
                 }
 
@@ -77,6 +81,13 @@
 
                 Thread.Sleep(300);
             }
+        }
+
+        private void Pause()
+        {
+            PauseMenu pauseMenu = new PauseMenu();
+
+            IOManager.DisplayMenu(pauseMenu);
         }
 
         private void SpawnApple()
