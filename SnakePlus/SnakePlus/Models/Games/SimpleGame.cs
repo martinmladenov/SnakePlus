@@ -1,33 +1,40 @@
-﻿namespace SnakePlus.Models
+﻿namespace SnakePlus.Models.Games
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
+    using Contracts;
+    using Snakes;
 
-    public class Game
+    public class SimpleGame : IGame
     {
         private Random random;
 
-        public Game(int width, int height)
+        public SimpleGame(int width, int height)
         {
             this.Width = width;
             this.Height = height;
 
+            this.Obstructions = new HashSet<Position>();
+
             this.random = new Random();
 
-            this.Snake = new Snake(new Position(Width/2,Height/2), 3, this);
             this.AppleCounter = 0;
-
-            this.SpawnApple();
         }
 
         public int Width { get; }
         public int Height { get; }
-        public Snake Snake { get; }
+        public ISnake Snake { get; private set; }
         public Position AppleLocation { get; private set; }
         public int AppleCounter { get; private set; }
+        public HashSet<Position> Obstructions { get; }
 
-        public void Start()
+        public void Start(ISnake snake)
         {
+            this.Snake = snake;
+
+            this.SpawnApple();
+
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -37,16 +44,16 @@
                     switch (key)
                     {
                         case ConsoleKey.LeftArrow:
-                            Snake.CurrentDirection = Snake.Direction.Left;
+                            Snake.CurrentDirection = Direction.Left;
                             break;
                         case ConsoleKey.RightArrow:
-                            Snake.CurrentDirection = Snake.Direction.Right;
+                            Snake.CurrentDirection = Direction.Right;
                             break;
                         case ConsoleKey.UpArrow:
-                            Snake.CurrentDirection = Snake.Direction.Up;
+                            Snake.CurrentDirection = Direction.Up;
                             break;
                         case ConsoleKey.DownArrow:
-                            Snake.CurrentDirection = Snake.Direction.Down;
+                            Snake.CurrentDirection = Direction.Down;
                             break;
                     }
                 }

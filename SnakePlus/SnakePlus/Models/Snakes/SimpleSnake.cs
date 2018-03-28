@@ -1,16 +1,19 @@
-﻿namespace SnakePlus.Models
+﻿namespace SnakePlus.Models.Snakes
 {
     using System;
     using System.Collections.Generic;
+    using Contracts;
 
-    public class Snake
+    public class SimpleSnake : ISnake
     {
-        private Game game;
+        private IGame game;
         private LinkedList<Position> positionsLinkedList;
         private Direction currentDirection;
 
-        public Snake(Position startPos, int length, Game game)
+        public SimpleSnake(IGame game, int length = 3)
         {
+            Position startPos = new Position(game.Width / 2, game.Height / 2);
+
             positionsLinkedList = new LinkedList<Position>();
             positionsLinkedList.AddFirst(startPos);
 
@@ -106,21 +109,13 @@
 
             Position nextPosition = new Position(targetX, targetY);
 
-            if (Positions.Contains(nextPosition))
+            if (Positions.Contains(nextPosition) || game.Obstructions.Contains(nextPosition))
             {
                 Dead = true;
             }
 
             positionsLinkedList.AddFirst(nextPosition);
             Positions.Add(nextPosition);
-        }
-
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right
         }
     }
 }

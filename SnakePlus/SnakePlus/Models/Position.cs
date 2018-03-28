@@ -1,4 +1,4 @@
-﻿namespace SnakePlus
+﻿namespace SnakePlus.Models
 {
     public class Position
     {

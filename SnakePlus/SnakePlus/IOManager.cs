@@ -2,11 +2,12 @@
 {
     using System;
     using System.Text;
+    using Contracts;
     using Models;
 
     public static class IOManager
     {
-        public static void Draw(Game game)
+        public static void Draw(IGame game)
         {
             string collectedApples = $"Apples collected: {game.AppleCounter}";
 
@@ -36,9 +37,13 @@
                     {
                         toDraw = 'x';
                     }
+                    else if (game.Obstructions.Contains(currPosition))
+                    {
+                        toDraw = '#';
+                    }
                     else if (game.AppleLocation.Equals(currPosition))
                     {
-                        toDraw = 'ó';
+                        toDraw = 'o';
                     }
                     else
                     {
@@ -52,7 +57,7 @@
             }
         }
 
-        public static void DisplayDeathMessage(Game game)
+        public static void DisplayDeathMessage(IGame game)
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
