@@ -71,11 +71,11 @@
                     Snake.Extend++;
                 }
 
-                IOManager.Draw(this);
+                OutputWriter.Draw(this);
 
                 if (Snake.Dead)
                 {
-                    IOManager.DisplayDeathMessage(this);
+                    OutputWriter.DisplayDeathMessage(this);
                     break;
                 }
 
@@ -87,7 +87,7 @@
         {
             PauseMenu pauseMenu = new PauseMenu();
 
-            IOManager.DisplayMenu(pauseMenu);
+            OutputWriter.DisplayMenu(pauseMenu);
         }
 
         private void SpawnApple()

@@ -13,7 +13,7 @@
             Console.CursorVisible = false;
 
             IMenu menu = new StartMenu();
-            IOManager.DisplayMenu(menu);
+            OutputWriter.DisplayMenu(menu);
 
             IGame game = new SimpleGame(20, 20);
 
@@ -32,7 +32,7 @@
             };
 
             SnakeSelectMenu menu = new SnakeSelectMenu(availableSnakes);
-            IOManager.DisplayMenu(menu);
+            OutputWriter.DisplayMenu(menu);
 
             return menu.SelectedSnake;
         }

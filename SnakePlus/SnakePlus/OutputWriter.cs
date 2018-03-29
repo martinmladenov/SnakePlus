@@ -5,7 +5,7 @@
     using Contracts;
     using Models;
 
-    public static class IOManager
+    public static class OutputWriter
     {
         public static void Draw(IGame game)
         {
@@ -17,6 +17,8 @@
 
             Console.Write(collectedApples);
 
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
             for (int y = 0; y < game.Height; y++)
             {
                 Console.SetCursorPosition(
@@ -26,35 +28,42 @@
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < game.Width; x++)
                 {
-                    Position currPosition = new Position(x, y);
-                    char toDraw;
-
-                    if (game.Snake.Head.Equals(currPosition))
-                    {
-                        toDraw = 'X';
-                    }
-                    else if (game.Snake.Positions.Contains(currPosition))
-                    {
-                        toDraw = 'x';
-                    }
-                    else if (game.Obstructions.Contains(currPosition))
-                    {
-                        toDraw = '#';
-                    }
-                    else if (game.AppleLocation.Equals(currPosition))
-                    {
-                        toDraw = 'o';
-                    }
-                    else
-                    {
-                        toDraw = '.';
-                    }
-
-                    sb.Append(toDraw + " ");
+                    sb.Append("· ");
                 }
 
                 Console.Write(sb);
             }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(
+                Console.WindowWidth / 2 - game.Width + 2 * game.AppleLocation.X,
+                (Console.WindowHeight - game.Height) / 2 + game.AppleLocation.Y);
+            Console.Write('o');
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            foreach (var obstruction in game.Obstructions)
+            {
+                Console.SetCursorPosition(
+                    Console.WindowWidth / 2 - game.Width + 2 * obstruction.X,
+                    (Console.WindowHeight - game.Height) / 2 + obstruction.Y);
+                Console.Write('#');
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var position in game.Snake.Positions)
+            {
+                Console.SetCursorPosition(
+                    Console.WindowWidth / 2 - game.Width + 2 * position.X,
+                    (Console.WindowHeight - game.Height) / 2 + position.Y);
+                Console.Write('x');
+            }
+
+            Console.SetCursorPosition(
+                Console.WindowWidth / 2 - game.Width + 2 * game.Snake.Head.X,
+                (Console.WindowHeight - game.Height) / 2 + game.Snake.Head.Y);
+            Console.Write('X');
+
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         public static void DisplayMenu(IMenu menu)
@@ -117,6 +126,8 @@
             Console.SetCursorPosition(
                 Console.WindowWidth / 2 - game.Width + 2 * snakePos.X,
                 (Console.WindowHeight - game.Height) / 2 + snakePos.Y);
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
 
             Console.Write('X');
 

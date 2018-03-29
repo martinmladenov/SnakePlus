@@ -54,7 +54,7 @@
                 }
             }
 
-            IOManager.DisplayMenu(this);
+            OutputWriter.DisplayMenu(this);
         }
     }
 }

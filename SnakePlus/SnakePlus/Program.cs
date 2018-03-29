@@ -4,7 +4,7 @@
     {
         public static void Main(string[] args)
         {
-            IOManager.ResizeWindow();
+            OutputWriter.ResizeWindow();
             
             Engine engine = new Engine();
             engine.InitGame();
