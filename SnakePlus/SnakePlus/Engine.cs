@@ -15,7 +15,7 @@
             IMenu menu = new StartMenu();
             OutputWriter.DisplayMenu(menu);
 
-            IGame game = new SimpleGame(20, 20);
+            IGame game = new ReverseGame(20, 20);
 
             ISnake selectedSnake = SelectSnake(game);
 
