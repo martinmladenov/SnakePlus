@@ -99,6 +99,8 @@
             {
                 menu.OnKeyPress(Console.ReadKey(true).Key);
             } while (!menu.Done);
+
+            Console.Clear();
         }
 
         public static void DisplayDeathMessage(IGame game)

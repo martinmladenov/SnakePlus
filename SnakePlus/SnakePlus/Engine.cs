@@ -15,8 +15,6 @@
             IMenu menu = new StartMenu();
             IOManager.DisplayMenu(menu);
 
-            Console.Clear();
-
             IGame game = new SimpleGame(20, 20);
             game.Start(new SimpleSnake(game));
         }
