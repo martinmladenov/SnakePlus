@@ -27,7 +27,8 @@
             ISnake[] availableSnakes =
             {
                 new SimpleSnake(game),
-                new InfiniteSnake(game)
+                new InfiniteSnake(game),
+                new DegradingSnake(game), 
             };
 
             SnakeSelectMenu menu = new SnakeSelectMenu(availableSnakes);
