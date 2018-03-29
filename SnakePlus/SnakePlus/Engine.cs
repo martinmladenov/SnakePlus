@@ -16,7 +16,7 @@
             IOManager.DisplayMenu(menu);
 
             IGame game = new SimpleGame(20, 20);
-            game.Start(new SimpleSnake(game));
+            game.Start(new InfiniteSnake(game));
         }
     }
 }
