@@ -26,8 +26,9 @@
         {
             IGame[] availableGames =
             {
-                new SimpleGame(x,y),  
-                new ReverseGame(x,y), 
+                new SimpleGame(x,y),
+                new ReverseGame(x,y),
+                new ChangingBarriersGame(x,y),
             };
 
             GameSelectMenu menu = new GameSelectMenu(availableGames);
@@ -42,7 +43,7 @@
             {
                 new SimpleSnake(game),
                 new InfiniteSnake(game),
-                new DegradingSnake(game), 
+                new DegradingSnake(game),
             };
 
             SnakeSelectMenu menu = new SnakeSelectMenu(availableSnakes);
