@@ -16,7 +16,24 @@
             IOManager.DisplayMenu(menu);
 
             IGame game = new SimpleGame(20, 20);
-            game.Start(new InfiniteSnake(game));
+
+            ISnake selectedSnake = SelectSnake(game);
+
+            game.Start(selectedSnake);
+        }
+
+        private ISnake SelectSnake(IGame game)
+        {
+            ISnake[] availableSnakes =
+            {
+                new SimpleSnake(game),
+                new InfiniteSnake(game)
+            };
+
+            SnakeSelectMenu menu = new SnakeSelectMenu(availableSnakes);
+            IOManager.DisplayMenu(menu);
+
+            return menu.SelectedSnake;
         }
     }
 }
