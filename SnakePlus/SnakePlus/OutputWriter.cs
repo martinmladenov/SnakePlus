@@ -137,7 +137,10 @@
 
         public static void ResizeWindow()
         {
-            Console.SetWindowSize(100, 30);
+            if(Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                Console.SetWindowSize(100, 30);
+            }
         }
     }
 }
